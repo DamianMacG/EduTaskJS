@@ -1,13 +1,24 @@
-
+const { seed } = require("./seed");
+const devData = require("../dev-data/index");
+const pool = require("../../pool");
 
 const runSeed = async () => {
   try {
-    await require("./seed");
-    console.log("Seed script executed successfully");
+    console.log("Seeding...");
+
+    await seed({
+      students: devData.students,
+      teachers: devData.teachers,
+      assignments: devData.assignments,
+    });
+
+    console.log("Data seeded successfully");
   } catch (error) {
-    console.error("Error running seed script:", error);
-    process.exit(1);
+    console.error("Error seeding data:", error);
+  } finally {
+    pool.end();
   }
 };
 
-runSeed().then(() => process.exit());
+runSeed();
+

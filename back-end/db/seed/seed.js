@@ -1,5 +1,5 @@
-// db/seed/seed.js
 const { Pool } = require("pg");
+const format = require("pg-format");
 require("dotenv").config();
 
 const studentsData = require("../dev-data/students");
@@ -36,6 +36,7 @@ const seedDatabase = async () => {
         id SERIAL PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
         email VARCHAR(255) NOT NULL UNIQUE,
+        role VARCHAR(20) NOT NULL,
         password VARCHAR(255) NOT NULL
       );
 
@@ -49,35 +50,47 @@ const seedDatabase = async () => {
     `);
 
     // Insert data into tables
-    await pool.query(
-      "INSERT INTO students (name, age, email, role, password) VALUES $1",
-      [
-        studentsData.map((student) => [
-          student.name,
-          student.age,
-          student.email,
-          student.role,
-          student.password,
-        ]),
-      ]
-    );
-    await pool.query("INSERT INTO teachers (name, email, password) VALUES $1", [
-      teachersData.map((teacher) => [
-        teacher.name,
-        teacher.email,
-        teacher.password,
-      ]),
+    const studentsValues = studentsData.map((student) => [
+      student.name,
+      student.age,
+      student.email,
+      student.role,
+      student.password,
     ]);
+
+    const teachersValues = teachersData.map((teacher) => [
+      teacher.name,
+      teacher.email,
+      teacher.role,
+      teacher.password,
+    ]);
+
+    const assignmentsValues = assignmentsData.map((assignment) => [
+      assignment.title,
+      assignment.description,
+      assignment.due_date,
+      assignment.teacherId,
+    ]);
+
     await pool.query(
-      "INSERT INTO assignments (title, description, due_date, teacher_id) VALUES $1",
-      [
-        assignmentsData.map((assignment) => [
-          assignment.title,
-          assignment.description,
-          assignment.due_date,
-          assignment.teacherId,
-        ]),
-      ]
+      format(
+        "INSERT INTO students (name, age, email, role, password) VALUES %L",
+        studentsValues
+      )
+    );
+
+    await pool.query(
+      format(
+        "INSERT INTO teachers (name, email, role, password) VALUES %L",
+        teachersValues
+      )
+    );
+
+    await pool.query(
+      format(
+        "INSERT INTO assignments (title, description, due_date, teacher_id) VALUES %L",
+        assignmentsValues
+      )
     );
 
     console.log("Seed data inserted successfully");

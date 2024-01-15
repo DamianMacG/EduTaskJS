@@ -1,4 +1,4 @@
-const { getStudents, getStudentsById } = require("./models");
+const { getStudents, getStudentsById } = require("../models/studentsModel");
 
 exports.getStudents = (req, res, next) => {
   getStudents()

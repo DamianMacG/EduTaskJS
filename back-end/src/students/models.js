@@ -5,3 +5,10 @@ exports.getStudents = () => {
     return result.rows;
   });
 };
+exports.getStudentsById = (id) => {
+  return pool
+    .query("SELECT * FROM students WHERE id = $1", [id])
+    .then((result) => {
+      return result.rows;
+    });
+};

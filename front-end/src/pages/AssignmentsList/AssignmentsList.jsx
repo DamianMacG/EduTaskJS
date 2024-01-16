@@ -1,6 +1,7 @@
+import { Link } from 'react-router-dom';
 
 const AssignmentsList = () => {
-    
+
   const assignments = [
     { id: 1, title: 'English Assignment 1', topic: 'Literature' },
     { id: 2, title: 'English Assignment 2', topic: 'Grammar' },
@@ -17,7 +18,9 @@ const AssignmentsList = () => {
           </li>
         ))}
       </ul>
-      <button>Create New Assignment</button>
+       <Link to="/teacher-dashboard/assignments/new-assignment">
+        <button>Create New Assignment</button>
+      </Link>
     </div>
   );
 };

@@ -1,0 +1,35 @@
+/* Add this styling to your CSS file */
+
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  .container {
+    text-align: center;
+  }
+  
+  h1 {
+    color: #ffffff;
+  }
+  
+  button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    background-color: #4caf50; /* Green */
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+  
+  button:hover {
+    background-color: #45a049; /* Dark green */
+  }
+  

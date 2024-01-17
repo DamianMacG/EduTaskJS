@@ -60,14 +60,14 @@ module.exports = [
     password: "testteacherpqr",
   },
   {
-    name: "Teacher Turner",
-    email: "turner@example.com",
+    name: "Teacher Turner2",
+    email: "turner2@example.com",
     role: "teacher",
     password: "testteachertstu",
   },
   {
-    name: "Teacher Robinson",
-    email: "robinson@example.com",
+    name: "Teacher Robinson2",
+    email: "robinson2@example.com",
     role: "teacher",
     password: "testteachervwx",
   },

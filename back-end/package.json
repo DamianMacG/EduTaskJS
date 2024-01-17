@@ -6,6 +6,7 @@
   "scripts": {
     "start": "dotenv nodemon app.js",
     "seed": "node db/seed/seed.js",
+    "seed-test": "node db/seed/seedTest.js",
     "test": "jest"
   },
   "repository": {

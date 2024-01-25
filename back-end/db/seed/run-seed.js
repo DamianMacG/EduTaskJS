@@ -1,6 +1,6 @@
 const { seed } = require("./seed");
 const devData = require("../dev-data/index");
-const pool = require("../../pool");
+const pool = require("../connection");
 
 const runSeed = async () => {
   try {

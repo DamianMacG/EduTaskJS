@@ -1,7 +1,7 @@
 const format = require("pg-format");
 const pool = require("../connection");
 
-const seed = async ({ studentsData, teachersData, assignmentsData }) => {
+const seed = async ({ students, teachers, assignments }) => {
   try {
     // Drop tables if they exist
     await pool.query(
@@ -37,7 +37,7 @@ const seed = async ({ studentsData, teachersData, assignmentsData }) => {
     `);
 
     // Insert data into tables
-    const studentsValues = studentsData.map((student) => [
+    const studentsValues = students.map((student) => [
       student.name,
       student.age,
       student.email,
@@ -45,14 +45,14 @@ const seed = async ({ studentsData, teachersData, assignmentsData }) => {
       student.password,
     ]);
 
-    const teachersValues = teachersData.map((teacher) => [
+    const teachersValues = teachers.map((teacher) => [
       teacher.name,
       teacher.email,
       teacher.role,
       teacher.password,
     ]);
 
-    const assignmentsValues = assignmentsData.map((assignment) => [
+    const assignmentsValues = assignments.map((assignment) => [
       assignment.title,
       assignment.description,
       assignment.due_date,

@@ -1,6 +1,8 @@
 const { Pool } = require("pg");
 const format = require("pg-format");
-require("dotenv").config();
+require("dotenv").config({
+  path: `${__dirname}/../../.env.development`,
+});
 
 const studentsData = require("../dev-data/students");
 const teachersData = require("../dev-data/teachers");

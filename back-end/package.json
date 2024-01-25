@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "dotenv nodemon app.js",
-    "seed": "node db/seed/seed.js",
+    "seed": "node db/seed/run-seed.js",
     "seed-test": "node db/seed/seedTest.js",
     "test": "jest"
   },

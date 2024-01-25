@@ -1,22 +1,7 @@
-const { Pool } = require("pg");
 const format = require("pg-format");
-require("dotenv").config({
-  path: `${__dirname}/../../.env.development`,
-});
+const pool = require("../connection");
 
-const studentsData = require("../dev-data/students");
-const teachersData = require("../dev-data/teachers");
-const assignmentsData = require("../dev-data/assignments");
-
-const pool = new Pool({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT,
-});
-
-const seedDatabase = async () => {
+const seed = async ({ studentsData, teachersData, assignmentsData }) => {
   try {
     // Drop tables if they exist
     await pool.query(
@@ -98,9 +83,7 @@ const seedDatabase = async () => {
     console.log("Seed data inserted successfully");
   } catch (error) {
     console.error("Error seeding database:", error);
-  } finally {
-    await pool.end();
   }
 };
 
-seedDatabase();
+module.exports = seed;

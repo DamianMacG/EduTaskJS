@@ -1,0 +1,5 @@
+DROP DATABASE IF EXISTS edutask2-test;
+DROP DATABASE IF EXISTS edutask2;
+
+CREATE DATABASE edutask2-test;
+CREATE DATABASE edutask2;

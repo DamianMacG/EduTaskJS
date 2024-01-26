@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "setup-dbs": "psql -f ./db/setup.sql",
     "start": "nodemon server.js",
     "seed": "node db/seed/run-seed.js",
     "seed-test": "node db/seed/seedTest.js",

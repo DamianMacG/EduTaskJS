@@ -29,7 +29,6 @@ const seedTestDatabase = async () => {
         age INT,
         email VARCHAR(255) NOT NULL UNIQUE,
         role VARCHAR(20) NOT NULL,
-        password VARCHAR(255) NOT NULL
       );
 
       CREATE TABLE teachers (
@@ -37,7 +36,6 @@ const seedTestDatabase = async () => {
         name VARCHAR(255) NOT NULL,
         email VARCHAR(255) NOT NULL UNIQUE,
         role VARCHAR(20) NOT NULL,
-        password VARCHAR(255) NOT NULL
       );
 
       CREATE TABLE assignments (
@@ -54,14 +52,12 @@ const seedTestDatabase = async () => {
       student.age,
       student.email,
       student.role,
-      student.password,
     ]);
 
     const teachersValues = testTeachersData.map((teacher) => [
       teacher.name,
       teacher.email,
       teacher.role,
-      teacher.password,
     ]);
 
     const assignmentsValues = testAssignmentsData.map((assignment) => [
@@ -73,14 +69,14 @@ const seedTestDatabase = async () => {
 
     await pool.query(
       format(
-        "INSERT INTO students (name, age, email, role, password) VALUES %L",
+        "INSERT INTO students (name, age, email, role) VALUES %L",
         studentsValues
       )
     );
 
     await pool.query(
       format(
-        "INSERT INTO teachers (name, email, role, password) VALUES %L",
+        "INSERT INTO teachers (name, email, role) VALUES %L",
         teachersValues
       )
     );

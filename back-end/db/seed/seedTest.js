@@ -100,4 +100,4 @@ const seedTestDatabase = async () => {
   }
 };
 
-seedTestDatabase();
+module.exports = seedTestDatabase;

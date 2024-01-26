@@ -1,4 +1,4 @@
-const pool = require("../db");
+const pool = require("../db/connection");
 
 exports.getStudents = async () => {
   try {

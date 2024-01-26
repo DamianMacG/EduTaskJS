@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon app.js",
     "seed": "node db/seed/run-seed.js",
-    "seed-test": "NODE_ENV=test node db/seed/seedTest.js",
+    "seed-test": "node db/seed/seedTest.js",
     "test": "jest"
   },
   "repository": {
@@ -30,5 +30,9 @@
   "devDependencies": {
     "jest": "^29.7.0",
     "supertest": "^6.3.4"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.js$"
   }
 }

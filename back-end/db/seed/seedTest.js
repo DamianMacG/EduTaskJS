@@ -1,8 +1,8 @@
 const { Pool } = require("pg");
 const format = require("pg-format");
 require("dotenv").config({
-    path: `${__dirname}/../../.env.test`,
-  });
+  path: `${__dirname}/../../.env.test`,
+});
 
 const testStudentsData = require("../test-data/students");
 const testTeachersData = require("../test-data/teachers");
@@ -28,14 +28,14 @@ const seedTestDatabase = async () => {
         name VARCHAR(255) NOT NULL,
         age INT,
         email VARCHAR(255) NOT NULL UNIQUE,
-        role VARCHAR(20) NOT NULL,
+        role VARCHAR(20) NOT NULL
       );
 
       CREATE TABLE teachers (
         id SERIAL PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
         email VARCHAR(255) NOT NULL UNIQUE,
-        role VARCHAR(20) NOT NULL,
+        role VARCHAR(20) NOT NULL
       );
 
       CREATE TABLE assignments (

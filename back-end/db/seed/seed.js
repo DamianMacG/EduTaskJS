@@ -15,14 +15,14 @@ const seed = async ({ students, teachers, assignments }) => {
         name VARCHAR(255) NOT NULL,
         age INT,
         email VARCHAR(255) NOT NULL UNIQUE,
-        role VARCHAR(20) NOT NULL,
+        role VARCHAR(20) NOT NULL
       );
 
       CREATE TABLE teachers (
         id SERIAL PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
         email VARCHAR(255) NOT NULL UNIQUE,
-        role VARCHAR(20) NOT NULL,
+        role VARCHAR(20) NOT NULL
       );
 
       CREATE TABLE assignments (
@@ -32,7 +32,7 @@ const seed = async ({ students, teachers, assignments }) => {
         due_date TIMESTAMP,
         teacher_id INT REFERENCES teachers(id)
       );
-    `);
+    `)
 
     // Insert data into tables
     const studentsValues = students.map((student) => [

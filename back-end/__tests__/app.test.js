@@ -49,5 +49,16 @@ describe("GET /api/v1/students/:id", () => {
     };
     expect(student).toMatchObject(expectedStudent);
   });
+  // test("should return status 404 for non-existent student ID", async () => {
+  //   const response = await request(app).get("/api/v1/students/999");
+  //   expect(response.status).toBe(404);
+  // });
 });
 
+describe("404 Route", () => {
+  test("should respond with a 404 status and a 'Not found' message", async () => {
+    const response = await request(app).get("/nonexistent-route");
+    expect(response.status).toBe(404);
+    expect(response.body).toEqual({ msg: "Not found" });
+  });
+});

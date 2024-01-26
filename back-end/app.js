@@ -7,12 +7,10 @@ const PORT = 8080;
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("WELCOME PAGE...");
-});
-
 app.use("/api/v1/students", studentRoutes);
 
-app.listen(PORT, () => {
-  console.log(`Listing on port ${PORT}...`);
+const server = app.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}...`);
 });
+
+module.exports = server;

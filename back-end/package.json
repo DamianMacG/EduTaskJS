@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "dotenv nodemon app.js",
+    "start": "nodemon app.js",
     "seed": "node db/seed/run-seed.js",
-    "seed-test": "node db/seed/seedTest.js",
+    "seed-test": "NODE_ENV=test node db/seed/seedTest.js",
     "test": "jest"
   },
   "repository": {
@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/DamianMacG/EduTaskJS#readme",
   "dependencies": {
-    "dotenv": "^16.3.1",
+    "dotenv": "^16.4.1",
     "express": "^4.18.2",
     "nodemon": "^3.0.2",
     "pg": "^8.11.3",

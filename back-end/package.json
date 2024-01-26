@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "nodemon server.js",
     "seed": "node db/seed/run-seed.js",
     "seed-test": "node db/seed/seedTest.js",
     "test": "jest"

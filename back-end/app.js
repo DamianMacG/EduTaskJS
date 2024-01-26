@@ -9,8 +9,8 @@ app.use(express.json());
 
 app.use("/api/v1/students", studentRoutes);
 
-const server = app.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}...`);
-});
+// const server = app.listen(PORT, () => {
+//   console.log(`Listening on port ${PORT}...`);
+// });
 
 module.exports = app;

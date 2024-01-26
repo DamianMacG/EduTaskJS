@@ -37,7 +37,6 @@ describe("GET /api/v1/students/:id", () => {
     expect(student).toHaveProperty("age", 19);
     expect(student).toHaveProperty("email", "grace@example.com");
     expect(student).toHaveProperty("role", "student");
-    expect(student).toHaveProperty("password", "testpass123");
 
     const expectedStudent = {
       id: 1,
@@ -45,7 +44,6 @@ describe("GET /api/v1/students/:id", () => {
       age: 19,
       email: "grace@example.com",
       role: "student",
-      password: "testpass123",
     };
     expect(student).toMatchObject(expectedStudent);
   });

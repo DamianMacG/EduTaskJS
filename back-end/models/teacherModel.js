@@ -9,7 +9,7 @@ exports.getTeachers = async () => {
   }
 };
 
-exports.getTeachersById = async (id) => {
+exports.getTeacherById = async (id) => {
   try {
     const result = await pool.query("SELECT * FROM teachers WHERE id = $1", [id]);
     return result.rows;

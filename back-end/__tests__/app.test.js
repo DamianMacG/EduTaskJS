@@ -76,8 +76,8 @@ describe("GET /api/v1/teachers/:id", () => {
     const response = await request(app).get("/api/v1/teachers/1");
     expect(response.status).toBe(200);
    
-    expect(response.body.teachers).toHaveLength(1);
-    const teacher = response.body.teachers[0];
+    expect(response.body.teacher).toHaveLength(1);
+    const teacher = response.body.teacher[0];
     expect(teacher).toHaveProperty("id", 1);
     expect(teacher).toHaveProperty("name", "Teacher Smith");
     expect(teacher).toHaveProperty("email", "smith@example.com");

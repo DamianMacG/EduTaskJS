@@ -96,4 +96,4 @@ const seedTestDatabase = async () => {
   }
 };
 
-module.exports = seedTestDatabase;
+module.exports = seedTestDatabase();

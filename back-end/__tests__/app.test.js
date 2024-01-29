@@ -29,6 +29,7 @@ describe("GET /api/v1/students", () => {
 describe("GET /api/v1/students/:id", () => {
   test("should return status 200 and a single student by ID with all properties", async () => {
     const response = await request(app).get("/api/v1/students/1");
+    console.log(response.body)
     expect(response.status).toBe(200);
     expect(response.body.student).toHaveLength(1);
     const student = response.body.student[0];
@@ -59,4 +60,41 @@ describe("404 Route", () => {
     expect(response.status).toBe(404);
     expect(response.body).toEqual({ msg: "Not found" });
   });
+});
+
+describe("GET /api/v1/teachers", () => {
+  test("should return status 200 and an array of teachers", async () => {
+    const response = await request(app).get("/api/v1/teachers");
+    expect(response.status).toBe(200);
+    expect(response.body.teachers).toEqual(expect.any(Array));
+    expect(response.body.teachers).toHaveLength(12);
+  });
+});
+
+describe("GET /api/v1/teachers/:id", () => {
+  test("should return status 200 and a single teacher by ID with all properties", async () => {
+    const response = await request(app).get("/api/v1/teachers/1");
+    expect(response.status).toBe(200);
+   
+    expect(response.body.teachers).toHaveLength(1);
+    const teacher = response.body.teachers[0];
+    expect(teacher).toHaveProperty("id", 1);
+    expect(teacher).toHaveProperty("name", "Teacher Smith");
+    expect(teacher).toHaveProperty("email", "smith@example.com");
+    expect(teacher).toHaveProperty("role", "teacher");
+
+    const expectedTeacher = {
+      id: 1,
+      name: "Teacher Smith",
+      email: "smith@example.com",
+      role: "teacher",
+    };
+
+    expect(teacher).toMatchObject(expectedTeacher);
+  });
+
+  // test("should return status 404 for non-existent teacher ID", async () => {
+  //   const response = await request(app).get("/api/v1/teachers/999");
+  //   expect(response.status).toBe(404);
+  // });
 });

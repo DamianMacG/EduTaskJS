@@ -29,7 +29,6 @@ describe("GET /api/v1/students", () => {
 describe("GET /api/v1/students/:id", () => {
   test("should return status 200 and a single student by ID with all properties", async () => {
     const response = await request(app).get("/api/v1/students/1");
-    console.log(response.body)
     expect(response.status).toBe(200);
     expect(response.body.student).toHaveLength(1);
     const student = response.body.student[0];
@@ -98,3 +97,13 @@ describe("GET /api/v1/teachers/:id", () => {
   //   expect(response.status).toBe(404);
   // });
 });
+
+describe("GET /api/v1/assignments", () => {
+  test("should return status 200 and an array of assignments", async () => {
+    const response = await request(app).get("/api/v1/assignments");
+    expect(response.status).toBe(200);
+    expect(response.body.assignments).toEqual(expect.any(Array));
+    expect(response.body.assignments).toHaveLength(10);
+  });
+});
+

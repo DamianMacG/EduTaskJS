@@ -47,10 +47,11 @@ describe("GET /api/v1/students/:id", () => {
     };
     expect(student).toMatchObject(expectedStudent);
   });
-  // test("should return status 404 for non-existent student ID", async () => {
-  //   const response = await request(app).get("/api/v1/students/999");
-  //   expect(response.status).toBe(404);
-  // });
+  test("should return status 404 for non-existent student ID", async () => {
+    const response = await request(app).get("/api/v1/students/999");
+    console.log(response.body)
+    expect(response.status).toBe(404);
+  });
 });
 
 describe("404 Route", () => {
@@ -113,7 +114,6 @@ describe("GET /api/v1/assignments/:id", () => {
     expect(response.status).toBe(200);
     expect(response.body.assignment).toHaveLength(1);
     const assignment = response.body.assignment[0];
-    console.log(response.body.assignment[0])
     expect(assignment).toHaveProperty("id", 1);
     expect(assignment).toHaveProperty("title", "Newton's Laws of Motion");
     expect(assignment).toHaveProperty(

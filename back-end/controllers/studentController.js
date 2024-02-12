@@ -11,9 +11,15 @@ exports.getStudents = async (req, res, next) => {
 
 exports.getStudentById = async (req, res, next) => {
   const { id } = req.params;
+  
   try {
     const student = await getStudentById(id);
-    res.status(200).json({ student });
+
+    if (student.length === 0) {
+      res.status(404).json({ msg: "Student not found" });
+    } else {
+      res.status(200).json({ student });
+    }
   } catch (error) {
     next(error);
   }

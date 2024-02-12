@@ -32,7 +32,7 @@ const seed = async ({ students, teachers, assignments }) => {
         due_date TIMESTAMP,
         teacher_id INT REFERENCES teachers(id)
       );
-    `)
+    `);
 
     // Insert data into tables
     const studentsValues = students.map((student) => [
@@ -75,8 +75,6 @@ const seed = async ({ students, teachers, assignments }) => {
         assignmentsValues
       )
     );
-
-    console.log("Seed data inserted successfully");
   } catch (error) {
     console.error("Error seeding database:", error);
   }

@@ -49,7 +49,6 @@ describe("GET /api/v1/students/:id", () => {
   });
   test("should return status 404 for non-existent student ID", async () => {
     const response = await request(app).get("/api/v1/students/999");
-    console.log(response.body)
     expect(response.status).toBe(404);
   });
 });
@@ -133,5 +132,9 @@ describe("GET /api/v1/assignments/:id", () => {
     };
 
     expect(assignment).toMatchObject(expectedAssignment);
+  });
+  test("should return status 404 for non-existent assignment ID", async () => {
+    const response = await request(app).get("/api/v1/assignments/999");
+    expect(response.status).toBe(404);
   });
 });

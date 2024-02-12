@@ -16,7 +16,11 @@ exports.getAssignmentById = async (req, res, next) => {
   const { id } = req.params;
   try {
     const assignment = await getAssignmentById(id);
-    res.status(200).json({ assignment });
+    if (assignment.length === 0) {
+      res.status(404).json({ msg: "Assignment not found" });
+    } else {
+      res.status(200).json({ assignment });
+    }
   } catch (error) {
     next(error);
   }

@@ -17,3 +17,15 @@ exports.getTeacherById = async (id) => {
     throw error;
   }
 };
+
+exports.getAssignmentsByTeacherId = async (teacher_id) => {
+  try {
+    const result = await pool.query(
+      "SELECT * FROM assignments WHERE teacher_id = $1",
+      [teacher_id]
+    );
+    return result.rows;
+  } catch (error) {
+    throw error;
+  }
+};

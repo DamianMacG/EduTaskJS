@@ -1,6 +1,7 @@
 const {
   getAssignments,
   getAssignmentById,
+  getAssignmentsByTeacherId,
 } = require("../models/assignmentsModel");
 
 exports.getAssignments = async (req, res, next) => {
@@ -25,3 +26,6 @@ exports.getAssignmentById = async (req, res, next) => {
     next(error);
   }
 };
+
+
+

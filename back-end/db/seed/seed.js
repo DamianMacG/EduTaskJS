@@ -52,7 +52,7 @@ const seed = async ({ students, teachers, assignments }) => {
       assignment.title,
       assignment.description,
       assignment.due_date,
-      assignment.teacher_id,
+      assignment.teacher_id, // Include teacher_id field
     ]);
 
     await pool.query(

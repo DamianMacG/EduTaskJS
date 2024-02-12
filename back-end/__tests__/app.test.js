@@ -138,3 +138,58 @@ describe("GET /api/v1/assignments/:id", () => {
     expect(response.status).toBe(404);
   });
 });
+
+describe("Getting Assignments by Teacher ID", () => {
+  test("should retrieve all assignments for a teacher", async () => {
+    const teacherId = 3;
+    const response = await request(app).get(
+      `/api/v1/teachers/${teacherId}/assignments`
+    ); 
+
+    console.log(response.body)
+
+    expect(response.status).toBe(200);
+    expect(Array.isArray(response.body.assignments)).toBe(true);
+
+    // Assert that the response contains specific assignments associated with teacher ID 3
+    expect(response.body.assignments).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          title: "Newton's Laws of Motion",
+          description:
+            "Explain the three laws formulated by Sir Isaac Newton and provide examples.",
+          due_date: "2024-02-10",
+          teacher_id: teacherId,
+        }),
+        expect.objectContaining({
+          title: "Cell Biology",
+          description:
+            "Explore the structure and functions of different cell organelles.",
+          due_date: "2024-03-31",
+          teacher_id: teacherId,
+        }),
+      ])
+    );
+  });
+
+  // test("should return an empty array if the teacher has no assignments", async () => {
+  //   const teacherId = 5;
+  //   const response = await request(app).get(
+  //     `/teachers/${teacherId}/assignments`
+  //   );
+
+  //   expect(response.status).toBe(200);
+  //   expect(Array.isArray(response.body.assignments)).toBe(true);
+  //   expect(response.body.assignments).toHaveLength(0);
+  // });
+
+  test("should return 404 if the teacher ID does not exist", async () => {
+    const nonExistentTeacherId = 999;
+    const response = await request(app).get(
+      `/teachers/${nonExistentTeacherId}/assignments`
+    );
+
+    expect(response.status).toBe(404);
+    expect(response.body.msg).toBe("Not found");
+  });
+});

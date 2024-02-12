@@ -13,7 +13,12 @@ exports.getTeacherById = async (req, res, next) => {
   const { id } = req.params;
   try {
     const teacher = await getTeacherById(id);
-    res.status(200).json({ teacher });
+
+    if (teacher.length === 0) {
+      res.status(404).json({ msg: "Teacher not found" });
+    } else {
+      res.status(200).json({ teacher });
+    }
   } catch (error) {
     next(error);
   }

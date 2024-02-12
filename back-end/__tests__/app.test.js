@@ -93,10 +93,10 @@ describe("GET /api/v1/teachers/:id", () => {
     expect(teacher).toMatchObject(expectedTeacher);
   });
 
-  // test("should return status 404 for non-existent teacher ID", async () => {
-  //   const response = await request(app).get("/api/v1/teachers/999");
-  //   expect(response.status).toBe(404);
-  // });
+  test("should return status 404 for non-existent teacher ID", async () => {
+    const response = await request(app).get("/api/v1/teachers/999");
+    expect(response.status).toBe(404);
+  });
 });
 
 describe("GET /api/v1/assignments", () => {

@@ -29,7 +29,7 @@ const seed = async ({ students, teachers, assignments }) => {
         id SERIAL PRIMARY KEY,
         title VARCHAR(255) NOT NULL,
         description TEXT,
-        due_date TIMESTAMP,
+        due_date DATE,
         teacher_id INT REFERENCES teachers(id)
       );
     `);
@@ -48,13 +48,6 @@ const seed = async ({ students, teachers, assignments }) => {
       teacher.role,
     ]);
 
-    const assignmentsValues = assignments.map((assignment) => [
-      assignment.title,
-      assignment.description,
-      assignment.due_date,
-      assignment.teacher_id, // Include teacher_id field
-    ]);
-
     await pool.query(
       format(
         "INSERT INTO students (name, age, email, role) VALUES %L",
@@ -69,12 +62,14 @@ const seed = async ({ students, teachers, assignments }) => {
       )
     );
 
-    await pool.query(
-      format(
-        "INSERT INTO assignments (title, description, due_date, teacher_id) VALUES %L",
-        assignmentsValues
-      )
-    );
+    // Insert assignments with correct teacher_id
+    for (const assignment of assignments) {
+      await pool.query(
+        `INSERT INTO assignments (title, description, due_date, teacher_id)
+         VALUES ($1, $2, $3, (SELECT id FROM teachers WHERE id = $4))`,
+        [assignment.title, assignment.description, assignment.due_date, assignment.teacher_id]
+      );
+    }
   } catch (error) {
     console.error("Error seeding database:", error);
   }

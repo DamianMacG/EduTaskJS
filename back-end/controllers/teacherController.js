@@ -13,9 +13,8 @@ exports.getTeacherById = async (req, res, next) => {
   const { id } = req.params;
   try {
     const teacher = await getTeacherById(id);
-
     if (teacher.length === 0) {
-      res.status(404).json({ msg: "Teacher not found" });
+      res.status(404).send();
     } else {
       res.status(200).json({ teacher });
     }
@@ -25,12 +24,11 @@ exports.getTeacherById = async (req, res, next) => {
 };
 
 exports.getAssignmentsByTeacherId = async (req, res, next) => {
-  const { teacher_id } = req.params;
-
+  const { id } = req.params;
   try {
-    const assignments = await getAssignmentsByTeacherId(teacher_id);
+    const assignments = await getAssignmentsByTeacherId(id);
     if (assignments.length === 0) {
-      res.status(404).json({ msg: "No assignments found for this teacher" });
+      res.status(404).send();
     } else {
       res.status(200).json({ assignments });
     }

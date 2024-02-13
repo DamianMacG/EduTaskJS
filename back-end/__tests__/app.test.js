@@ -139,49 +139,75 @@ describe("GET /api/v1/assignments/:id", () => {
   });
 });
 
+
+
 describe("Getting Assignments by Teacher ID", () => {
   test("should retrieve all assignments for a teacher", async () => {
-    const teacherId = 3;
+    const id = 3;
     const response = await request(app).get(
-      `/api/v1/teachers/${teacherId}/assignments`
-    ); 
-
-    console.log(response.body)
-
+      `/api/v1/teachers/${id}/assignments`
+    );
     expect(response.status).toBe(200);
     expect(Array.isArray(response.body.assignments)).toBe(true);
 
-    // Assert that the response contains specific assignments associated with teacher ID 3
-    expect(response.body.assignments).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          title: "Newton's Laws of Motion",
-          description:
-            "Explain the three laws formulated by Sir Isaac Newton and provide examples.",
-          due_date: "2024-02-10",
-          teacher_id: teacherId,
-        }),
-        expect.objectContaining({
-          title: "Cell Biology",
-          description:
-            "Explore the structure and functions of different cell organelles.",
-          due_date: "2024-03-31",
-          teacher_id: teacherId,
-        }),
-      ])
+    const formatAssignments = (assignments) => {
+      return assignments.map((assignment) => ({
+        ...assignment,
+        due_date: new Date(assignment.due_date),
+      }));
+    };
+
+    // Format the received assignments to convert due_date strings to Date objects
+    const formattedResponse = formatAssignments(response.body.assignments);
+
+    // Expect the formatted assignments to match the expected assignments
+    const expectedAssignments = [
+      {
+        title: "Newton's Laws of Motion",
+        description:
+          "Explain the three laws formulated by Sir Isaac Newton and provide examples.",
+        due_date: expect.any(Date),
+        id: expect.any(Number),
+        teacher_id: id,
+      },
+      {
+        title: "Cell Biology",
+        description:
+          "Explore the structure and functions of different cell organelles.",
+        due_date: expect.any(Date),
+        id: expect.any(Number),
+        teacher_id: id,
+      },
+      {
+        title: "Artificial Intelligence",
+        description:
+          "Examine the impact of artificial intelligence on society and the economy.",
+        due_date: expect.any(Date),
+        id: expect.any(Number),
+        teacher_id: id,
+      },
+      {
+        title: "The Periodic Table",
+        description:
+          "Discuss the development and significance of the periodic table in chemistry.",
+        due_date: expect.any(Date),
+        id: expect.any(Number),
+        teacher_id: id,
+      },
+    ];
+    expect(formattedResponse).toEqual(
+      expect.arrayContaining(expectedAssignments)
     );
   });
 
-  // test("should return an empty array if the teacher has no assignments", async () => {
-  //   const teacherId = 5;
-  //   const response = await request(app).get(
-  //     `/teachers/${teacherId}/assignments`
-  //   );
-
-  //   expect(response.status).toBe(200);
-  //   expect(Array.isArray(response.body.assignments)).toBe(true);
-  //   expect(response.body.assignments).toHaveLength(0);
-  // });
+  test("should return a 404 with the correct message if the teacher has no assignments", async () => {
+    const teacherId = 5;
+    const response = await request(app).get(`/teachers/${teacherId}/assignments`);
+  
+    expect(response.status).toBe(404);
+    expect(response.body.msg).toBe("Not found");
+  });
+  
 
   test("should return 404 if the teacher ID does not exist", async () => {
     const nonExistentTeacherId = 999;

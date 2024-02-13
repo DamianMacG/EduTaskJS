@@ -18,11 +18,11 @@ exports.getTeacherById = async (id) => {
   }
 };
 
-exports.getAssignmentsByTeacherId = async (teacher_id) => {
+exports.getAssignmentsByTeacherId = async (id) => {
   try {
     const result = await pool.query(
       "SELECT * FROM assignments WHERE teacher_id = $1",
-      [teacher_id]
+      [id]
     );
     return result.rows;
   } catch (error) {

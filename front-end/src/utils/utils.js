@@ -1,16 +1,22 @@
-import axios from "axios";
-
-const api = axios.create({
-  baseURL: "https://reddit-style-backend-nc.onrender.com/api",
-});
+const BASE_URL = "http://localhost:8080";
 
 export const getAssignmentsByTeacherId = async (id) => {
   try {
-    const response = await api.get(`/${id}/assignments`);
-    return response.data;
+    const response = await fetch(
+      `${BASE_URL}/api/v1/teachers/${id}/assignments`
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const assignments = await response.json();
+    console.log(assignments.assignments);
+    return assignments.assignments;
   } catch (error) {
     console.error("Error fetching assignments:", error);
     throw error;
   }
 };
 
+getAssignmentsByTeacherId(1);

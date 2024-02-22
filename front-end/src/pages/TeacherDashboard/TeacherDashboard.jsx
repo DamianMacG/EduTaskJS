@@ -1,4 +1,4 @@
-// TeacherDashboard.js
+
 
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
@@ -13,9 +13,6 @@ const TeacherDashboard = () => {
           <li>
             <Link to="/teacher-dashboard/assignments">Assignments</Link>
           </li>
-          <li>
-            <Link to="/teacher-dashboard/students">Students</Link>
-          </li>
         </ul>
       </nav>
     </div>
@@ -23,3 +20,7 @@ const TeacherDashboard = () => {
 };
 
 export default TeacherDashboard;
+
+
+
+

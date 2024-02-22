@@ -19,4 +19,4 @@ export const getAssignmentsByTeacherId = async (id) => {
   }
 };
 
-getAssignmentsByTeacherId(1);
+

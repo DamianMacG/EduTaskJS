@@ -5,7 +5,7 @@ import Homepage from './pages/Homepage/Homepage';
 import StudentDashboard from './pages/StudentDashboard/StudentDashboard';
 import TeacherDashboard from './pages/TeacherDashboard/TeacherDashboard';
 import StudentsPage from './pages/StudentList/StudentList';
-import AssignmentsList from './pages/AssignmentsList/AssignmentsList';
+import AssignmentList from './pages/AssignmentList/AssignmentList';
 import CreateAssignment from './pages/CreateAssignment/CreateAssignment';
 import StudentForum from './pages/StudentForum/StudentForum';
 import StudentAssignments from './pages/StudentAssignments/StudentAssignments';
@@ -20,7 +20,7 @@ const App = () => {
         <Route path="/student-dashboard/forum" element={<StudentForum />} />
         <Route path="/student-dashboard/assignments" element={<StudentAssignments />} />
         <Route path="/teacher-dashboard" element={<TeacherDashboard />} />
-        <Route path="/teacher-dashboard/assignments" element={<AssignmentsList />} />
+        <Route path="/teacher-dashboard/assignments" element={<AssignmentList />} />
         <Route path="/teacher-dashboard/students" element={<StudentsPage />} />
         <Route path="/teacher-dashboard/assignments/new-assignment" element={<CreateAssignment />} />
         
